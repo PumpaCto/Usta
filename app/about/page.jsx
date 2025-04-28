@@ -2,12 +2,28 @@
 
 import { motion } from 'framer-motion';
 
+const coreValues = [
+  {
+    title: "Vision",
+    description: "To create a decentralized entertainment universe where creativity and opportunity are limitless.",
+  },
+  {
+    title: "Mission",
+    description: "Empowering communities through innovative blockchain solutions, gaming, NFTs, and anime content.",
+  },
+  {
+    title: "Values",
+    description: "Transparency, community-driven development, creativity, and unshakable trust.",
+  },
+];
+
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-blue-950 to-black text-white flex flex-col items-center justify-center px-6 py-20 space-y-10 font-poppins">
-      {/* Başlık */}
+    <div className="relative min-h-screen bg-gradient-to-b from-black via-blue-950 to-black text-white flex flex-col items-center px-8 py-20 font-poppins overflow-hidden">
+
+      {/* Title */}
       <motion.h1
-        className="text-5xl md:text-7xl font-bold text-center bg-gradient-to-r from-yellow-400 to-blue-500 bg-clip-text text-transparent"
+        className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-blue-500 mb-16"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -15,79 +31,66 @@ export default function AboutPage() {
         About MiraVerse
       </motion.h1>
 
-      {/* Açıklama */}
+      {/* Main Text */}
       <motion.p
-        className="max-w-4xl text-center text-gray-300 text-lg md:text-2xl"
+        className="text-lg md:text-2xl text-gray-300 max-w-4xl text-center mb-16"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
+        transition={{ delay: 0.5, duration: 1.5 }}
       >
-        MiraVerse Token is not just another cryptocurrency — it's a movement. We combine futuristic anime aesthetics, an active community, and powerful decentralized tools to create a universe of endless opportunities.
+        MiraVerse Token is not just a cryptocurrency. It's a movement.  
+        We are crafting a universe where decentralization meets limitless creativity — gaming, anime, NFTs, and beyond.
       </motion.p>
 
-      {/* 3lü Kartlar */}
+      {/* Values Section */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl">
+        {coreValues.map((item, index) => (
+          <motion.div
+            key={index}
+            className="bg-gray-900 p-8 rounded-xl shadow-lg hover:scale-105 transition transform"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: index * 0.2 }}
+          >
+            <h3 className="text-3xl font-bold mb-4 text-gradient bg-gradient-to-r from-yellow-400 to-blue-400">{item.title}</h3>
+            <p className="text-gray-400">{item.description}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Animated Rocket */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 w-full max-w-6xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.3 } }
-        }}
+        className="mt-24 w-40 h-40"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2 }}
       >
-        {/* Kart 1 */}
-        <motion.div
-          className="bg-gray-900 p-6 rounded-xl shadow-lg hover:scale-105 transform transition"
-          whileHover={{ scale: 1.05 }}
-        >
-          <h3 className="text-2xl font-bold text-gradient bg-gradient-to-r from-yellow-400 to-blue-400 mb-4">Our Vision</h3>
-          <p className="text-gray-400">
-            To create a crypto ecosystem where anime, gaming, NFTs, and blockchain collide to forge a new world of decentralized fun.
-          </p>
-        </motion.div>
-
-        {/* Kart 2 */}
-        <motion.div
-          className="bg-gray-900 p-6 rounded-xl shadow-lg hover:scale-105 transform transition"
-          whileHover={{ scale: 1.05 }}
-        >
-          <h3 className="text-2xl font-bold text-gradient bg-gradient-to-r from-yellow-400 to-blue-400 mb-4">Our Mission</h3>
-          <p className="text-gray-400">
-            Empower users with ownership, creativity, and control. We break the limits of centralized systems.
-          </p>
-        </motion.div>
-
-        {/* Kart 3 */}
-        <motion.div
-          className="bg-gray-900 p-6 rounded-xl shadow-lg hover:scale-105 transform transition"
-          whileHover={{ scale: 1.05 }}
-        >
-          <h3 className="text-2xl font-bold text-gradient bg-gradient-to-r from-yellow-400 to-blue-400 mb-4">Our Community</h3>
-          <p className="text-gray-400">
-            Passionate fans, gamers, developers, anime lovers, and crypto enthusiasts joining forces to shape the future.
-          </p>
-        </motion.div>
+        <img src="/rocket.png" alt="Rocket" className="w-full h-full object-contain animate-bounce-slow" />
       </motion.div>
 
-      {/* Vizyon Videosu */}
+      {/* Call to Action */}
       <motion.div
-        className="w-full max-w-4xl mt-16"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        className="mt-24 bg-gradient-to-r from-purple-600 to-blue-600 p-10 rounded-xl text-center shadow-lg max-w-3xl w-full"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1 }}
       >
-        <video
-          className="w-full rounded-xl shadow-2xl border-2 border-blue-600"
-          controls
-          poster="/poster-image.jpg"
+        <h3 className="text-4xl font-bold mb-4">Ready to join the journey?</h3>
+        <p className="text-gray-300 mb-8">Become a part of the revolution and explore new galaxies of opportunity with MiraVerse.</p>
+        <a
+          href="https://t.me/MiraVerseToken"
+          target="_blank"
+          className="bg-black px-8 py-4 rounded-full text-lg font-bold hover:scale-110 transition transform inline-block"
         >
-          <source src="/about-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          Join the Community
+        </a>
       </motion.div>
 
+      {/* Footer */}
+      <footer className="text-gray-500 mt-20 text-sm">
+        © 2025 MiraVerse Token. Built for dreamers.
+      </footer>
     </div>
   );
-      }
+}
