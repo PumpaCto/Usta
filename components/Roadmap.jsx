@@ -2,52 +2,64 @@
 
 import { motion } from 'framer-motion';
 
-const roadmapSteps = [
-  { quarter: "Q2 2025", title: "Token Launch", description: "Launch of $MIRA Token via Pump.fun on Solana network with secured liquidity." },
-  { quarter: "Q3 2025", title: "Community Growth", description: "Reach 5,000+ holders, launch ambassador program, grow Twitter & Telegram." },
-  { quarter: "Q4 2025", title: "NFT Series Release", description: "Drop our first anime-inspired NFT collection tied to game assets and rewards." },
-  { quarter: "Q1 2026", title: "Mobile Game Launch", description: "Release Play-to-Earn mobile game on App Store and Google Play. Beta early access for holders." },
-  { quarter: "Q2 2026", title: "Anime Series Start", description: "Begin production of original anime series based on the Miraverse universe." },
-  { quarter: "Q3 2026", title: "PC Open World Game", description: "Launch development of AI-driven open-world crypto game for PC and Mac." },
-  { quarter: "Q4 2026", title: "CEX Listings", description: "Apply for top centralized exchange (CEX) listings to boost adoption." },
-  { quarter: "2027", title: "Expansion & Partnerships", description: "Global partnerships with brands, studios, and major crypto projects." },
+const roadmap = [
+  { quarter: "Q2 2025", milestone: "Token Launch on Solana via Pump.fun" },
+  { quarter: "Q3 2025", milestone: "Reach 1000+ Holders and Strong Community" },
+  { quarter: "Q4 2025", milestone: "NFT Collection Launch & Exchange Listings" },
+  { quarter: "Q1 2026", milestone: "Mobile Game Beta Release" },
+  { quarter: "Q2 2026", milestone: "Start Anime Series Production" },
+  { quarter: "Q3 2026", milestone: "Launch Open World PC Crypto Game" },
 ];
 
 export default function Roadmap() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-blue-950 to-black text-white flex flex-col items-center p-8">
-      <motion.h1
-        className="text-5xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-blue-500"
+    <section className="relative w-full min-h-screen bg-gradient-to-b from-black via-blue-950 to-black flex flex-col items-center py-20 text-white overflow-hidden">
+      {/* Stars Background */}
+      <div className="absolute inset-0 z-0 bg-[url('/stars.png')] bg-cover bg-center opacity-10"></div>
+
+      {/* Title */}
+      <motion.h2
+        className="text-5xl md:text-6xl font-extrabold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-blue-400 z-10"
         initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 1 }}
       >
-        Our Roadmap
-      </motion.h1>
+        Roadmap
+      </motion.h2>
 
-      <div className="relative w-full max-w-5xl">
-        <div className="border-l-4 border-blue-500 absolute h-full left-1/2 transform -translate-x-1/2"></div>
-        <div className="flex flex-col space-y-16">
-          {roadmapSteps.map((step, idx) => (
-            <motion.div
-              key={idx}
-              className={`relative flex ${idx % 2 === 0 ? 'justify-start' : 'justify-end'} items-center w-full`}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -100 : 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 }}
-            >
-              <div className="bg-gray-900 p-6 rounded-xl shadow-xl w-[320px]">
-                <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-blue-400 text-transparent bg-clip-text">
-                  {step.quarter}
-                </h3>
-                <h4 className="text-xl font-semibold mb-2">{step.title}</h4>
-                <p className="text-gray-400">{step.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      {/* Timeline */}
+      <div className="relative flex flex-col space-y-20 max-w-4xl z-10">
+        {roadmap.map((step, index) => (
+          <motion.div
+            key={index}
+            className="relative flex flex-col items-center group"
+            initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            {/* Circle */}
+            <div className="w-6 h-6 bg-yellow-400 rounded-full z-20 border-4 border-blue-500"></div>
+
+            {/* Line */}
+            {index !== roadmap.length - 1 && (
+              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-1 h-32 bg-gradient-to-b from-yellow-400 to-blue-400 opacity-60"></div>
+            )}
+
+            {/* Card */}
+            <div className="bg-gray-900 rounded-xl shadow-lg p-6 mt-6 w-full hover:scale-105 transform transition duration-300 group-hover:shadow-2xl">
+              <h3 className="text-2xl md:text-3xl font-bold mb-2 text-gradient bg-gradient-to-r from-yellow-400 to-blue-400">
+                {step.quarter}
+              </h3>
+              <p className="text-gray-300 text-lg">{step.milestone}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </div>
+
+      {/* Glow Effects */}
+      <div className="absolute -bottom-20 left-1/2 w-[600px] h-[600px] bg-blue-500 opacity-20 blur-3xl rounded-full transform -translate-x-1/2 z-0"></div>
+    </section>
   );
 }
