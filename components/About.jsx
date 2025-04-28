@@ -4,59 +4,62 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section id="about" className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-black via-blue-950 to-black text-white overflow-hidden px-6">
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-black via-blue-950 to-black text-white p-8">
       
-      {/* Stars Background */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('/stars.png')] bg-repeat z-0 animate-stars"></div>
+      <motion.h1
+        className="text-5xl md:text-7xl font-bold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-blue-500"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        About Miraverse
+      </motion.h1>
 
-      <div className="z-10 max-w-5xl mx-auto text-center">
-        {/* Title */}
-        <motion.h2
-          className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-blue-500 mb-8"
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+      <motion.p
+        className="text-lg md:text-2xl max-w-4xl text-gray-300 text-center mb-12 leading-relaxed"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 1.5 }}
+      >
+        Welcome to <span className="text-yellow-400 font-bold">Miraverse Token</span> — a revolutionary project blending the world of decentralized finance, anime art, and gaming innovation.
+        Our mission is to create a vibrant, immersive universe where cryptocurrency enthusiasts and anime lovers can thrive together. 
+        Backed by NFTs, mobile games, an anime series, and open-world PC gaming, $MIRA is your gateway to infinite possibilities across the metaverse and beyond.
+      </motion.p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mt-12">
+        {/* Card 1 */}
+        <motion.div
+          className="bg-gray-900 rounded-lg p-8 shadow-xl hover:scale-105 transition-transform"
+          whileHover={{ scale: 1.05 }}
+          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
         >
-          About MiraVerse
-        </motion.h2>
+          <h3 className="text-2xl font-bold mb-4 text-gradient bg-gradient-to-r from-yellow-400 to-blue-400 text-transparent bg-clip-text">Our Vision</h3>
+          <p className="text-gray-400">
+            To lead the future of entertainment and decentralized economies by combining blockchain technology with powerful storytelling and cutting-edge gaming experiences.
+          </p>
+        </motion.div>
 
-        {/* Description */}
-        <motion.p
-          className="text-gray-300 text-lg md:text-xl leading-relaxed mb-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+        {/* Card 2 */}
+        <motion.div
+          className="bg-gray-900 rounded-lg p-8 shadow-xl hover:scale-105 transition-transform"
+          whileHover={{ scale: 1.05 }}
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1 }}
         >
-          MiraVerse Token is more than just a cryptocurrency. It's a journey into a new dimension where innovation, community, and ambition converge. 
-          Our mission is to create an interconnected universe where holders have access to NFT collections, decentralized games, and an entire metaverse ecosystem.
-          <br /><br />
-          Powered by passion and the spirit of decentralization, MiraVerse aims to redefine what it means to be part of a truly groundbreaking project. 
-          Together, we will build worlds, create art, and establish a legacy.
-        </motion.p>
-
-        {/* Core Values */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
-          {[
-            { title: "Innovation", description: "Always pushing the boundaries of technology and creativity." },
-            { title: "Community", description: "Driven by the power of a united and visionary community." },
-            { title: "Sustainability", description: "Building for the long term with solid foundations." }
-          ].map((item, idx) => (
-            <motion.div
-              key={idx}
-              className="bg-gray-900 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1 + idx * 0.5 }}
-            >
-              <h3 className="text-2xl font-bold mb-2 text-gradient bg-gradient-to-r from-yellow-400 to-blue-400">{item.title}</h3>
-              <p className="text-gray-400">{item.description}</p>
-            </motion.div>
-          ))}
-        </div>
+          <h3 className="text-2xl font-bold mb-4 text-gradient bg-gradient-to-r from-yellow-400 to-blue-400 text-transparent bg-clip-text">Our Mission</h3>
+          <p className="text-gray-400">
+            Empower communities through decentralized access to exclusive anime content, NFT rewards, in-game ownership, and life-changing crypto opportunities.
+          </p>
+        </motion.div>
       </div>
-    </section>
+
+      {/* Extra Star Background */}
+      <div className="absolute inset-0 bg-[url('/stars.png')] opacity-10 bg-cover bg-center pointer-events-none"></div>
+    </div>
   );
 }
