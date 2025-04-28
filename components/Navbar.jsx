@@ -1,100 +1,56 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Tokenomics', href: '#tokenomics' },
-    { name: 'Community', href: '#community' },
-    { name: 'Roadmap', href: '#roadmap' },
-  ];
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      className="fixed w-full z-50 bg-black bg-opacity-60 backdrop-blur-md text-white shadow-md"
+      initial={{ y: -80 }}
       animate={{ y: 0 }}
-      transition={{ duration: 1 }}
-      className="w-full fixed top-0 left-0 z-50 bg-gradient-to-r from-black via-blue-950 to-black shadow-lg"
+      transition={{ duration: 0.8 }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        
+      <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
         {/* Logo */}
-        <Link href="/">
-          <motion.img
-            src="/logo.png"
-            alt="Logo"
-            className="h-12 w-12 cursor-pointer"
-            whileHover={{ scale: 1.1 }}
-          />
+        <Link href="/" className="flex items-center space-x-2">
+          <img src="/logo.png" alt="Miraverse Logo" className="w-10 h-10 rounded-full" />
+          <span className="font-bold text-xl tracking-wider bg-gradient-to-r from-yellow-400 to-blue-400 text-transparent bg-clip-text">Miraverse</span>
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-10 text-lg font-semibold">
-          {navLinks.map((link, index) => (
-            <motion.a
-              key={index}
-              href={link.href}
-              whileHover={{ scale: 1.1 }}
-              className="text-gray-300 hover:text-blue-400 transition"
-            >
-              {link.name}
-            </motion.a>
-          ))}
+        <div className="hidden md:flex space-x-8 text-lg">
+          <Link href="/" className="hover:text-blue-400 transition">Home</Link>
+          <Link href="/about" className="hover:text-blue-400 transition">About</Link>
+          <Link href="/tokenomics" className="hover:text-blue-400 transition">Tokenomics</Link>
+          <Link href="/roadmap" className="hover:text-blue-400 transition">Roadmap</Link>
+          <Link href="/contact" className="hover:text-blue-400 transition">Contact</Link>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)}>
-            <svg
-              className="w-8 h-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="focus:outline-none">
+            {menuOpen ? (
+              <span className="text-3xl">&times;</span>
+            ) : (
+              <span className="text-3xl">&#9776;</span>
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Items */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="md:hidden flex flex-col items-center bg-black py-4 gap-6"
-        >
-          {navLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className="text-gray-300 hover:text-blue-400 text-lg font-semibold"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </a>
-          ))}
-        </motion.div>
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden flex flex-col items-center bg-black bg-opacity-90 space-y-6 py-6">
+          <Link href="/" className="hover:text-blue-400 transition" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/about" className="hover:text-blue-400 transition" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link href="/tokenomics" className="hover:text-blue-400 transition" onClick={() => setMenuOpen(false)}>Tokenomics</Link>
+          <Link href="/roadmap" className="hover:text-blue-400 transition" onClick={() => setMenuOpen(false)}>Roadmap</Link>
+          <Link href="/contact" className="hover:text-blue-400 transition" onClick={() => setMenuOpen(false)}>Contact</Link>
+        </div>
       )}
     </motion.nav>
   );
